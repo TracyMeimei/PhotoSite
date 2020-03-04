@@ -1,0 +1,16 @@
+<h1> photos of <%= @user.first_name %> <%= @user.last_name %></h1>
+
+<% @photos.each do |photo| %>
+
+  <div>
+    <%= image_tag photo.file_name %>
+    photo created on: <%= photo.date_time %>
+    <% @comments.where("photo_id=?",photo.id).each do |comment|%>
+      <li>
+        posted by: <%= link_to display_name(comment.user_id), user_photos_path(comment.user_id)%>
+        created at: <%= comment.date_time %>
+      </li>
+
+    <% end %>
+  </div>
+<% end %>
